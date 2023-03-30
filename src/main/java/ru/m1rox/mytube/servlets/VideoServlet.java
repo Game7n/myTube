@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 import java.util.Collection;
 import java.util.List;
 
-@WebServlet("/video")
+@WebServlet("/api/video")
 @MultipartConfig(location = "C:\\Users\\Nikita\\IdeaProjects\\myTube\\videos")
 public class VideoServlet extends HttpServlet {
 

@@ -109,23 +109,21 @@ button {
     background-color: #3d3d3d;
 }
 
-#main-page {
+.outline {
     width: 100%;
-    display: none;
+}
+
+.content {
+
+}
+
+#main-page {
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     grid-gap: 15px;
 }
 
-#main-page.active {
-    display: grid;
-}
-
-.outline {
-    height: 100%;
-    width: 100%;
-}
-
-.video-container {
+.video-outline {
     aspect-ratio: 16/9;
     background-color: orange;
 }
