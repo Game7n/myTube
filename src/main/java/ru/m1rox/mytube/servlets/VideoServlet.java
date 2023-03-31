@@ -30,7 +30,7 @@ public class VideoServlet extends HttpServlet {
     File dir = new File("C:\\Users\\Nikita\\nginx\\nginx-1.22.1\\MyTube\\videos");
     String[] files = dir.list();
 
-    Videos video = new Videos();
+    Videos videos = new Videos();
 
     if(files != null){
 
@@ -40,10 +40,10 @@ public class VideoServlet extends HttpServlet {
         System.out.println(files[i]);
       }
 
-      video.setVideos(Arrays.asList(files));
+      videos.setVideos(Arrays.asList(files));
     }
 
-    resp.getWriter().write(new Gson().toJson(video));
+    resp.getWriter().write(new Gson().toJson(videos));
 
   }
 
