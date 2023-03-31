@@ -1,5 +1,6 @@
 package ru.m1rox.mytube.servlets;
 
+import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -7,15 +8,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import ru.m1rox.mytube.http.responses.Videos;
 
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Collection;
-import java.util.List;
+import java.util.Arrays;
+import java.util.UUID;
 
 @WebServlet("/api/video")
-@MultipartConfig(location = "C:\\Users\\Nikita\\IdeaProjects\\myTube\\videos")
+@MultipartConfig(location = "C:\\Users\\Nikita\\nginx\\nginx-1.22.1\\MyTube\\videos")
 public class VideoServlet extends HttpServlet {
 
   @Override
@@ -24,8 +25,26 @@ public class VideoServlet extends HttpServlet {
   }
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    System.out.println("do get");
-    resp.getWriter().write("test");
+    System.out.println("--get--");
+
+    File dir = new File("C:\\Users\\Nikita\\nginx\\nginx-1.22.1\\MyTube\\videos");
+    String[] files = dir.list();
+
+    Videos video = new Videos();
+
+    if(files != null){
+
+      for (int i = 0; i < files.length; i++) {
+        files[i] = "http://localhost:80/videos/" + files[i];
+
+        System.out.println(files[i]);
+      }
+
+      video.setVideos(Arrays.asList(files));
+    }
+
+    resp.getWriter().write(new Gson().toJson(video));
+
   }
 
   @Override
@@ -33,7 +52,7 @@ public class VideoServlet extends HttpServlet {
     System.out.println("--post--");
 
     Part part = req.getPart("video");
-    part.write(part.getSubmittedFileName());
+    part.write(UUID.randomUUID() + part.getSubmittedFileName());
     System.out.println(part.getContentType());
 
     resp.getWriter().write("123");

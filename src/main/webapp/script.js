@@ -11,9 +11,9 @@ const route = function (event) {
 }
 
 let routes = {
-    "/myTube-1.0-SNAPSHOT/" : "/myTube-1.0-SNAPSHOT/main-page.html",
-    "/myTube-1.0-SNAPSHOT/subscribes" : "/myTube-1.0-SNAPSHOT/subscribes.html",
-    "/myTube-1.0-SNAPSHOT/history" : "/myTube-1.0-SNAPSHOT/history.html"
+    "/myTube-1.0-SNAPSHOT/" : ["/myTube-1.0-SNAPSHOT/main-page.html", "/myTube-1.0-SNAPSHOT/api/video"],
+    "/myTube-1.0-SNAPSHOT/subscribes" : ["/myTube-1.0-SNAPSHOT/subscribes.html", ""],
+    "/myTube-1.0-SNAPSHOT/history" : ["/myTube-1.0-SNAPSHOT/history.html", ""]
 }
 
 const handleLocation = async () => {
@@ -22,12 +22,34 @@ const handleLocation = async () => {
     let html;
 
     if(routes[path] !== undefined) {
-        html = await fetch(routes[window.location.pathname]).then(data => data.text());
-
-        let promise = await fetch()
+        html = await fetch(routes[path][0]).then(data => data.text());
 
         document.querySelector(".outline").innerHTML = html;
-        document.querySelector(".outline").style.color = "white";
+
+        if(routes[path][1] !== "") {
+            let promise = await fetch(routes[path][1], {
+                method: "GET"
+            }).then(res => res.json())
+
+            let videos = promise.videos;
+
+            console.log(videos);
+
+            let stringBuilder = "";
+
+            for (let i = 0; i < videos.length; i++) {
+                stringBuilder += "<div class=\"video-outline\">" +
+                    "<video class=\"video\" autoplay=\"autoplay\" controls=\"controls\" width=\"100%\" height=\"100%\">" +
+                    "<source src=\"" + videos[i] + "\">" +
+                    "</video>" +
+                    "</div>"
+
+            }
+
+            document.getElementById("main-page").innerHTML = stringBuilder;
+        }else{
+            document.querySelector(".outline").style.color = "white";
+        }
     }
 }
 
