@@ -12,6 +12,7 @@
     appearance: none;
 
     line-height: 15px;
+    color: white;
 }
 
 body {
@@ -130,6 +131,31 @@ button {
     align-content: start;
 }
 
+.open-video {
+    display: block;
+    
+    width: 100%;
+    height: 100%;
+}
+
+#video-page {
+    display: flex;
+    padding-top: 30px;
+
+}
+
+.video-block {
+    width: calc(100vw - 500px);
+    padding: 0 50px;
+}
+
+.next-video-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    grid-gap:20px;
+}
+
 .video-outline {
     aspect-ratio: 16/9;
     background-color: orange;
@@ -138,5 +164,6 @@ button {
 
 video {
     vertical-align: bottom;
+    pointer-events: none;
 }
 

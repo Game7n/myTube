@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @WebServlet("/api/video")
 @MultipartConfig(location = "C:\\Users\\Nikita\\nginx\\nginx-1.22.1\\MyTube\\videos")
-public class VideoServlet extends HttpServlet {
+public class mainPageServlet extends HttpServlet {
 
   @Override
   protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,23 +27,31 @@ public class VideoServlet extends HttpServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     System.out.println("--get--");
 
-    File dir = new File("C:\\Users\\Nikita\\nginx\\nginx-1.22.1\\MyTube\\videos");
-    String[] files = dir.list();
+    System.out.println(req.getParameter("v"));
 
-    Videos videos = new Videos();
+    if(req.getParameter("v") != null) {
+      File video = new File("C:\\Users\\Nikita\\nginx\\nginx-1.22.1\\MyTube\\videos\\" + req.getParameter("v"));
 
-    if(files != null){
+      resp.getWriter().write("{\"response\":\"http://localhost:80/videos/" + req.getParameter("v") + "\"}");
+    }else {
+      File dir = new File("C:\\Users\\Nikita\\nginx\\nginx-1.22.1\\MyTube\\videos");
+      String[] files = dir.list();
 
-      for (int i = 0; i < files.length; i++) {
-        files[i] = "http://localhost:80/videos/" + files[i];
+      Videos videos = new Videos();
 
-        System.out.println(files[i]);
+      if(files != null){
+
+        for (int i = 0; i < files.length; i++) {
+          files[i] = "http://localhost:80/videos/" + files[i];
+
+          System.out.println(files[i]);
+        }
+
+        videos.setVideos(Arrays.asList(files));
       }
 
-      videos.setVideos(Arrays.asList(files));
+      resp.getWriter().write(new Gson().toJson(videos));
     }
-
-    resp.getWriter().write(new Gson().toJson(videos));
 
   }
 

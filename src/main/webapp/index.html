@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <link rel="stylesheet" type="text/css" href="dialog-styles.css" />
+    <link rel="stylesheet" type="text/css" href="dialogWindows/dialog-styles.css" />
 
 </head>
 <body>
@@ -37,7 +37,7 @@
                 <a href="/myTube-1.0-SNAPSHOT/" class="menu el" id="main-page-button"> Гланвя </a>
                 <a href="/myTube-1.0-SNAPSHOT/subscribes" class="menu el" id="subscribes-button"> Подписки </a>
                 <a href="/myTube-1.0-SNAPSHOT/history" class="menu el" id="history-button"> История </a>
-                <a class="menu el" id="add-video-button"> Добавить видео</a>
+                <div class="menu el" id="add-video-button"> Добавить видео</div>
             </div>
 
             <div class="outline">
@@ -45,17 +45,10 @@
             </div>
         </div>
 
-        <div class="dialog-wrapper" id="dialog-add-video">
-            <div class="blackout" id="blackout-dialog-add-video"></div>
-            <div class="dialog-content">
-                <input id="send-video" type="file" accept="video/mp4,video/x-m4v,video/*"/>
-            </div>
-        </div>
-
     </div>
 
     <script src="script.js"></script>
-    <script src="main-page.js"></script>
-    <script src="dialog-script.js"></script>
+    <script src="utils/videoHandler.js"></script>
+    <script src="dialogWindows/dialog-script.js"></script>
 </body>
 </html>
