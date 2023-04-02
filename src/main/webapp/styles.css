@@ -157,13 +157,19 @@ button {
 }
 
 .video-outline {
-    aspect-ratio: 16/9;
+    /*aspect-ratio: 16/10;*/
     background-color: orange;
     /*max-width: 650px;*/
+    display: flex;
+    flex-direction: column;
+}
+
+.main-page-video {
+    pointer-events: none;
 }
 
 video {
+    aspect-ratio: 16/9;
     vertical-align: bottom;
-    pointer-events: none;
 }
 

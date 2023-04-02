@@ -25,7 +25,7 @@ document.getElementById("add-video-button").addEventListener("click", () => {
         let formData = new FormData();
         formData.append("video", document.getElementById("send-video").files[0]);
 
-        let promise = fetch("/myTube-1.0-SNAPSHOT/api/video", {
+        let promise = fetch("/myTube-1.0-SNAPSHOT/api/mainPage", {
             method: "POST",
             body: formData
         });

@@ -3,7 +3,7 @@ class VideoHandler {
 
         document.getElementById("main-page-button").classList.add("active");
 
-        let promise = await fetch("/myTube-1.0-SNAPSHOT/api/video", {
+        let promise = await fetch("/myTube-1.0-SNAPSHOT/api/mainPage", {
             method: "GET"
         }).then(resp => resp.json())
 
@@ -21,10 +21,13 @@ class VideoHandler {
             stringBuilder +=
                 "<div class=\"video-outline\">" +
                 "   <a href=\"/myTube-1.0-SNAPSHOT/watch?v="+ name +"\" class=\"open-video\">" +
-                "       <video class=\"video\" autoplay=\"autoplay\" controls=\"controls\" width=\"100%\" height=\"100%\">" +
+                "       <video class=\"main-page-video\" autoplay=\"autoplay\" controls=\"controls\" width=\"100%\" height=\"100%\">" +
                 "           <source src=\"" + videos[i] + "\">" +
                 "       </video>" +
                 "   </a>" +
+                // "   <div class=\"video-name\">" +
+                // "       name video" +
+                // "   </div>"
                 "</div>"
 
         }
@@ -54,7 +57,7 @@ class VideoHandler {
 
         console.log(urlParams.get("v"));
 
-        let promise = await fetch("/myTube-1.0-SNAPSHOT/api/video?v=" + urlParams.get("v"), {
+        let promise = await fetch("/myTube-1.0-SNAPSHOT/api/mainPage?v=" + urlParams.get("v"), {
             method: "GET"
         }).then(resp => resp.json());
 
@@ -62,7 +65,7 @@ class VideoHandler {
 
         document.querySelector(".video-block").innerHTML =
             "       <div class=\"video-outline\">\n" +
-            "            <video class=\"video\" autoplay=\"autoplay\" controls=\"controls\" width=\"100%\" height=\"100%\">\n" +
+            "            <video class=\"watcing-page-video\" autoplay=\"autoplay\" controls=\"controls\" width=\"100%\" height=\"100%\">\n" +
             "                <source src=\"" + promise.response + "\">\n" +
             "            </video>\n" +
             "        </div>";

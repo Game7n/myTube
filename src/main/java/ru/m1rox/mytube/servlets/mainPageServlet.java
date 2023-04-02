@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.UUID;
 
-@WebServlet("/api/video")
+@WebServlet("/api/mainPage")
 @MultipartConfig(location = "C:\\Users\\Nikita\\nginx\\nginx-1.22.1\\MyTube\\videos")
 public class mainPageServlet extends HttpServlet {
 
