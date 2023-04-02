@@ -25,9 +25,9 @@ class VideoHandler {
                 "           <source src=\"" + videos[i] + "\">" +
                 "       </video>" +
                 "   </a>" +
-                // "   <div class=\"video-name\">" +
-                // "       name video" +
-                // "   </div>"
+                "   <div class=\"name-video\">" +
+                "       Name video" +
+                "   </div>" +
                 "</div>"
 
         }
